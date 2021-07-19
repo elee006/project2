@@ -31,4 +31,5 @@ num_of_rep = '5'
 
 q = makequery(ing,num_of_rep)
 r = getjson(q)
+print(r)
 

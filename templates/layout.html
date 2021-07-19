@@ -8,6 +8,21 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+        <style>
+        body {
+            animation: fadeInAnimation ease 3s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
   <header class="site-header">
@@ -20,7 +35,7 @@
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link" href="/">Home</a>
-            <a class="nav-item nav-link" href="/about">Second page</a>
+            <a class="nav-item nav-link" href="/about">About</a>
           </div>
         </div>
       </div>
@@ -29,7 +44,7 @@
   <main role="main" class="container">
     <div class="row">
       <div class="col-md-8">
-        <h1>We Have Food At Home</h1> {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
       </div>
     </div>
   </main>
