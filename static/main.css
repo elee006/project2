@@ -1,6 +1,6 @@
 body {
-  background: #fafafa;
-  color: #333333;
+ background-image: "foodbackground.jpeg";
+ background-color: #cccccc;
   margin-top: 5rem;
   animation: fadeInAnimation ease 3s
   animation-iteration-count: 1;
@@ -108,7 +108,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #04AA6D;
+  background-color: #9073B4;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;

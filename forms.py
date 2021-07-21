@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
+  
 def Invalid_Credentials(form, field):
     username_entered = form.username.data
     password_entered = field.data
@@ -24,6 +25,6 @@ class RegistrationForm(FlaskForm):
     
 class loginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), Invalid_Credentials])
+    password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField("Login")
                                
