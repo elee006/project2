@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class = "container">
+      <h2>{{ subtitle }}</h2>
+      <p>{{ text }}</p> 
+      <br/>
+        <form action = "/myFridge" METHOD = "POST">
+            <input type = "text" placeholder = "Enter an Ingredient" name = "item">
+            <input type = "submit" value = "Add Ingredient" class = "btn btn-secondary">
+        </form>
+        <br/><br/>
+        {% for item in Fridge %}
+            <h4>
+                {{item.item}}
+            </h4>
+        {% endfor %}
+        <br/>
+        <form action="/Recipes" METHOD = POST>
+            <input type="submit" value="Find Recipes" >
+        </form>
+    </div>
+
+{% endblock content %}
