@@ -1,6 +1,7 @@
 body {
- background-image: "foodbackground.jpeg";
+ background: url("pexels-lukas-616401.jpg");
  background-color: #cccccc;
+ background-size: 1720px 900px;
   margin-top: 5rem;
   animation: fadeInAnimation ease 3s
   animation-iteration-count: 1;
@@ -16,12 +17,12 @@ body {
      }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+h1, h2, h3, h4, h5, h6,text {
+  color: #000000;
 }
 
 .bg-steel {
-  background-color: #9073B4;
+  background-color: #C19A6B;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -92,9 +93,9 @@ a.article-title:hover {
 }
 
 /* Bordered form */
-form {
+/*form {
   border: 3px solid #f1f1f1;
-}
+}/*
 
 /* Full-width inputs */
 input[type=text], input[type=password] {
@@ -108,7 +109,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #9073B4;
+  background-color: #C19A6B;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -116,7 +117,7 @@ button {
   cursor: pointer;
   width: 100%;
 }
-
+.button1 {font-size: 10px;}
 /* Add a hover effect for buttons */
 button:hover {
   opacity: 0.8;
@@ -161,4 +162,11 @@ span.psw {
   .cancelbtn {
     width: 100%;
   }
+}
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
 }

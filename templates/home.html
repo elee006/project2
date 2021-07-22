@@ -1,10 +1,25 @@
 {% extends "layout.html" %}
 {% block content %}
+
+
+
+<div class="centered">
+
     <h2>{{ subtitle }}</h2>
-    <p>{{ text }}
-    <br> {{text2}}
+    <h3>{{ subtitle2 }}</h3>
+    <p> {{text2}}
     </p>
-    <button class="button" onclick='location.href="https://green-double-5000.codio.io/register"'>register</button>
-<button class="button" onclick='location.href="https://green-double-5000.codio.io/login"'>login</button>
+    <button class="button" onclick='location.href="https://green-double-5000.codio.io/register"'>Register</button>
+    <button class="button" onclick='location.href="https://green-double-5000.codio.io/login"'>Login</button>
+</div>
+
+
+
+ <!--   <h2>{{ subtitle }}</h2>
+    <h3>{{ subtitle2 }}</h3>
+    <p> {{text2}}
+    </p>
+    <button class="button" onclick='location.href="https://green-double-5000.codio.io/register"'>Register</button>
+<button class="button" onclick='location.href="https://green-double-5000.codio.io/login"'>Login</button> -->
 
 {% endblock content %}

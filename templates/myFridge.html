@@ -9,15 +9,11 @@
             <input type = "submit" value = "Add Ingredient" class = "btn btn-secondary">
         </form>
         <br/><br/>
-        {% for item in Fridge %}
-            <h4>
-                {{item.item}}
-            </h4>
-        {% endfor %}
         <br/>
         <form action="/Recipes" METHOD = POST>
             <input type="submit" value="Find Recipes" >
         </form>
+            <button class="button button1" onclick='location.href="https://green-double-5000.codio.io/logout"'>Logout</button>
     </div>
 
 {% endblock content %}
