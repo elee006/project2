@@ -22,3 +22,5 @@ class loginForm(FlaskForm):
 class FridgeForm(FlaskForm):
     Item = StringField('Enter Item', validators = [DataRequired()])
     submit = SubmitField('Add Item')
+
+

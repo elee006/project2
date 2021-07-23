@@ -9,8 +9,12 @@
     <h3>{{ subtitle2 }}</h3>
     <p> {{text2}}
     </p>
-    <button class="button" onclick='location.href="https://green-double-5000.codio.io/register"'>Register</button>
+    {%if current_user.is_authenticated %}
+    <button class="button" onclick='location.href="https://green-double-5000.codio.io/login"'>Your Fridge</button>
+    {% else %}
     <button class="button" onclick='location.href="https://green-double-5000.codio.io/login"'>Login</button>
+    <button class="button" onclick='location.href="https://green-double-5000.codio.io/register"'>Register</button>
+    {% endif %}
 </div>
 
 

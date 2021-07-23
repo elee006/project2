@@ -131,9 +131,19 @@ def myFridge():
     if request.method == "POST":
         item_name = request.form['item']
         new_item = Fridge(item = item_name , user = current_user)
-        db.session.add(new_item)
-        db.session.commit()
-        return render_template('myFridge.html', subtitle= 'My Fridge', text='This is my Fridge', ingredients = item_list)
+        try:
+            db.session.add(new_item)
+            db.session.commit()
+            return render_template('myFridge.html', subtitle= 'My Fridge', text='This is my Fridge', ingredients = item_list)
+        except:
+            db.session.rollback()
+            item_delete = Fridge.query.filter_by(item = item_name).first()
+            db.session.delete(item_delete)
+            db.session.commit()
+            db.session.add(new_item)
+            db.session.commit()
+            return render_template('myFridge.html', subtitle= 'My Fridge', text='This is my Fridge', ingredients = item_list)
+        #return render_template('myFridge.html', subtitle= 'My Fridge', text='This is my Fridge', ingredients = item_list)
         #except:
     #    return "There was an Error!"
     else:
@@ -150,13 +160,14 @@ def Recipes():
 
     ingredients = []
     show_recipes = []
+    message = "No recipes found"
     for food in current_user.fridge:
         ingredients.append(food.item)
     show_recipes = get_recipes(ingredients)
-    
-    
-    return render_template('Recipes.html', subtitle= 'Recipes Found', content = show_recipes)
-
+    if show_recipes == []:
+        return render_template('Recipes.html', subtitle= 'Recipes Found', error = message)
+    else:
+        return render_template('Recipes.html', subtitle= 'Recipes Found', content = show_recipes)
 @app.route('/Recipes/recipeinfo')
 def info():
       recipe_id = 1003464

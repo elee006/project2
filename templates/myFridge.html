@@ -2,7 +2,7 @@
 {% block content %}
     <div class = "container">
       <h2>{{ subtitle }}</h2>
-      <p>{{ text }}</p> 
+        <h4>Here is your fridge! Add or delete items, when satisfied click "Find Recipes".</h4> 
       <br/>
         <form action = "/myFridge" METHOD = "POST">
             <input type = "text" placeholder = "Enter an Ingredient" name = "item">
@@ -24,6 +24,7 @@
         <form action="/Recipes" METHOD = POST>
             <input type="submit" value="Find Recipes" >
         </form>
+        <small>*a maximum of 10 recpies will be returned, the larger the fridge the more accurate the results are</small>
             <button class="button" onclick='location.href="https://green-double-5000.codio.io/logout"'>Logout</button>
     </div>
 
