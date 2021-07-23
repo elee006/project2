@@ -170,12 +170,12 @@ def Recipes():
         return render_template('Recipes.html', subtitle= 'Recipes Found', content = show_recipes)
 @app.route('/Recipes/recipeinfo')
 def info():
-      recipe_id = 1003464
-      #recipe_id = request.args['id']
+      #recipe_id = 1003464
+      recipe_id = str(request.args['id'])
+      print(recipe_id)
       recipe_info_endpoint = "recipes/{0}/information".format(recipe_id)
       ingedientsWidget = "recipes/{0}/ingredientWidget".format(recipe_id)
       equipmentWidget = "recipes/{0}/equipmentWidget".format(recipe_id)
-
       recipe_info = requests.request("GET", url + recipe_info_endpoint, headers=headers).json()
 
       recipe_headers = {

@@ -3,14 +3,14 @@
     <h2>{{ subtitle }}</h2>
     <br/><br/>
     <h2>{{error}}</h2>
-    {% for stuff in content %}
+   {% for stuff in content %}
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
               <small class="text-muted">Servings: {{ stuff[1] }} | </small>
               <small class="text-muted">Cook time: {{ stuff[2] }} minutes</small>
             </div>
-              <h2><a class="article-title" href="{{ url_for('info') }}">{{ stuff[0] }}</a></h2>
+              <h2><a class="article-title" href="{{ stuff[8] }}" target ="_blank">{{ stuff[0] }}</a></h2>
               <p><b>Ingredients</b></p>
              {% for i in stuff[4] %}
                   <small> {{i}} </small>
@@ -25,7 +25,26 @@
               {% for i in stuff[6] %}
                   <small>{{i}} {{stuff[6][i][0]}}{{stuff[6][i][1]}}, </small>
               {% endfor %}
-              
+<!--           {% for recipe in recipes %}
+          <li class="media">
+              <img src="{{recipe['image']}}" class="align-self-center mr-3" alt="..." width="15%" height="15%">
+              <div class="media-body">
+                  <h2 class="mt-0 mb-1"><a href="{{url_for(recipe['source'])}}">{{ recipe['title'] }}</a></h2>
+                                <p><b>Ingredients</b></p>
+             {% for i in recipe['ingredients_list'] %}
+                  <small> {{i}} </small>
+                  <br>
+              {% endfor %}
+              <br>
+            <p class="article-content">{{ recipe['summary'] }}</p>
+              <p>**********</p>
+             {% for i in recipe['instructions'] %}
+             <p class="article-content">{{ i }}</p>
+              {% endfor %}
+              {% for i in recipe['nutrients'] %}
+                  <small>{{i}} {{recipe['nutrients'][i]['name']}}{{recipe['nutrients'][i]['serving']}}, </small>
+              {% endfor %}
+             {% endfor %}  -->
           </div>
         </article>
     {% endfor %}
