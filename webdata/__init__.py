@@ -42,13 +42,15 @@ def dataframe(dic):
     df = pd.DataFrame.from_dict(dic)
     return df
 
-
-ing = ['rice','soy sauce','chicken','eggs']
-num_of_rep = '10'
-
-q = makequery(ing,num_of_rep)
-r = getjson(q)
-m = getinfo(r)
-d = dataframe(m)
-print(d)
+def output(lis):
+    num_of_rep = '10'
+    q = makequery(lis,num_of_rep)
+    r = getjson(q)
+    m = getinfo(r)
+    return m
+    
+# num_of_rep = '10'
+# test = ['chicken','curry','rice','beans']
+# d = output(test)
+# print(d)
 

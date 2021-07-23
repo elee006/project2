@@ -1,4 +1,31 @@
 {% extends "layout.html" %}
 {% block content %}
     <h2>{{ subtitle }}</h2>
+    <br/><br/>
+    {% for stuff in content %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <small class="text-muted">Servings: {{ stuff[1] }} | </small>
+              <small class="text-muted">Cook time: {{ stuff[2] }} minutes</small>
+            </div>
+              <h2><a class="article-title" href="{{ url_for('info') }}">{{ stuff[0] }}</a></h2>
+              <p><b>Ingredients</b></p>
+             {% for i in stuff[4] %}
+                  <small> {{i}} </small>
+                  <br>
+              {% endfor %}
+              <br>
+            <p class="article-content">{{ stuff[3] }}</p>
+              <p>**********</p>
+             {% for i in stuff[5] %}
+             <p class="article-content">{{ i }}</p>
+              {% endfor %}
+              {% for i in stuff[6] %}
+                  <small>{{i}} {{stuff[6][i][0]}}{{stuff[6][i][1]}}, </small>
+              {% endfor %}
+              
+          </div>
+        </article>
+    {% endfor %}
 {% endblock content %}

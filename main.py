@@ -5,6 +5,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_behind_proxy import FlaskBehindProxy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from webdata import output
+from webdata.recipe import get_recipes
+import requests
 app = Flask(__name__)
 proxied = FlaskBehindProxy(app) 
 app.config['SECRET_KEY'] = 'd552b24612de9b25e081844d77829297'
@@ -12,11 +15,16 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
 login_manager = LoginManager(app)
-
+headers = {
+    'x-rapidapi-key': "cdcc19f7bemshcaafa6b12f20c45p1ec5eajsn982786737a25",
+    'x-rapidapi-host': "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
+    }
+querystring = {"includeNutrition":"true"}
+url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/"
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    username = db.Column(db.String(20),unique=True,  nullable=False)
+    email = db.Column(db.String(120),unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     
     fridge = db.relationship('Fridge',backref = 'user', lazy = True)
@@ -39,11 +47,20 @@ class User(UserMixin, db.Model):
     
 class Fridge (db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    item = db.Column(db.String(50),unique = True, nullable = False)
+    item = db.Column(db.String(50), nullable = False )
     date = db.Column(db.DateTime, default = datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
     def __repr__(self):
         return f"Fridge('{self.item}')"
+
+class Recipe (db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    real_id = db.Column(db.String(50), nullable = False)
+    date = db.Column(db.DateTime, default = datetime.utcnow)
+    def __repr__(self):
+        return f"Fridge('{self.real_id}')"
+
+    
 
     
 # class Recipes (db.Model):
@@ -61,6 +78,7 @@ def load_user(user_id):
     if user_id is not None:
         return User.query.get(user_id)
     return None
+
 @app.route("/")
 def home():
     return render_template('home.html', subtitle='Home Page', subtitle2='Welcome to "We Have Food At Home"', text2='Have you ever wanted McDonalds, but your mom tells you "No because we have food at home"? Have you ever been too lazy to go out to eat? Are you trying to save money? Well this is the place for you!!')
@@ -81,6 +99,8 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+         return redirect(url_for('myFridge'))
     log_form = loginForm()
     password_entered = log_form.password.data
     user_entered = log_form.username.data
@@ -107,18 +127,18 @@ def myFridge():
 #         flash('Created', 'success')
 #         return redirect(url_for('myFridge'))
 #     return render_template('myFridge.html', subtitle= 'My Fridge', text='This is my Fridge')
+    item_list = current_user.fridge
     if request.method == "POST":
         item_name = request.form['item']
-        new_item = Fridge(item = item_name , user_id = User.query.get(1))
+        new_item = Fridge(item = item_name , user = current_user)
         db.session.add(new_item)
         db.session.commit()
-        return redirect('/myFridge')
+        return render_template('myFridge.html', subtitle= 'My Fridge', text='This is my Fridge', ingredients = item_list)
         #except:
     #    return "There was an Error!"
     else:
-        u = User.query.get(1)
-        items = u.fridge
-        return render_template('myFridge.html', subtitle= 'My Fridge', text='This is my Fridge')
+        #items = u.fridge
+        return render_template('myFridge.html', subtitle= 'My Fridge', text='This is my Fridge', ingredients = item_list)
 
 # @app.route('/logout')
 # def logout():
@@ -127,16 +147,49 @@ def myFridge():
 
 @app.route('/Recipes', methods=['GET', 'POST'])
 def Recipes():
-    return render_template('Recipes.html', subtitle= 'Recipes Found')
 
-@app.route('/MyRecipes', methods=['GET', 'POST'])
-def MyRecipes():
-    return render_template('MyRecipes.html', subtitle= "Here are the Recipes you've saved")
+    ingredients = []
+    show_recipes = []
+    for food in current_user.fridge:
+        ingredients.append(food.item)
+    show_recipes = get_recipes(ingredients)
+    
+    
+    return render_template('Recipes.html', subtitle= 'Recipes Found', content = show_recipes)
 
-@app.route('/Nutrition', methods=['GET', 'POST'])
-def Nutrition():
-    return render_template('Nutrition.html', subtitle= "Nutritional Facts")
+@app.route('/Recipes/recipeinfo')
+def info():
+      recipe_id = 1003464
+      #recipe_id = request.args['id']
+      recipe_info_endpoint = "recipes/{0}/information".format(recipe_id)
+      ingedientsWidget = "recipes/{0}/ingredientWidget".format(recipe_id)
+      equipmentWidget = "recipes/{0}/equipmentWidget".format(recipe_id)
 
+      recipe_info = requests.request("GET", url + recipe_info_endpoint, headers=headers).json()
+
+      recipe_headers = {
+          'x-rapidapi-host': "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+          'x-rapidapi-key': "cdcc19f7bemshcaafa6b12f20c45p1ec5eajsn982786737a25",
+          'accept': "text/html"
+      }
+      querystring = {"defaultCss":"true", "showBacklink":"true"}
+
+      recipe_info['inregdientsWidget'] = requests.request("GET", url + ingedientsWidget, headers=recipe_headers, params=querystring).text
+      recipe_info['equipmentWidget'] = requests.request("GET", url + equipmentWidget, headers=recipe_headers, params=querystring).text
+
+      return render_template('info.html', recipe=recipe_info)
+    
+    
+@app.route('/delete/<int:id>')
+def delete(id):
+    item_delete = Fridge.query.get_or_404(id)
+    try:
+        db.session.delete(item_delete)
+        db.session.commit()
+        return redirect(url_for('myFridge'))
+    except:
+        return "Could not delete"
+    
 @app.route('/Jokes-Trivia', methods=['GET', 'POST'])
 def Jokes_trivia():
     return render_template('Jokes_trivia.html', subtitle="Random Joke/Trivia generator")
