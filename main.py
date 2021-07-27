@@ -12,6 +12,7 @@ app = Flask(__name__)
 proxied = FlaskBehindProxy(app) 
 app.config['SECRET_KEY'] = 'd552b24612de9b25e081844d77829297'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 login_manager = LoginManager(app)
