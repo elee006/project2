@@ -4,6 +4,7 @@ import pandas as pd
 import sqlalchemy as db
 from sqlalchemy import create_engine
 from sqlalchemy import select
+import sqlite3
 
 
 url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients"
@@ -48,7 +49,13 @@ def output(lis):
     r = getjson(q)
     m = getinfo(r)
     return m
+
+def fridge_list():
+    con = sqlite3.connect("sqlite:///site.db")
+    df = pd.read_sql_query("SELECT * Users", con)
+    print(df.head())
     
+#fridge_list()
 # num_of_rep = '10'
 # test = ['chicken','curry','rice','beans']
 # d = output(test)

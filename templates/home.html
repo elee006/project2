@@ -2,13 +2,24 @@
 {% block content %}
 
 
+<!--#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}-->
 
-<div class="centered">
-
+        <video autoplay muted loop id="myVideo">
+          <source src="static/home.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+<div class="content">
     <h2>{{ subtitle }}</h2>
-    <h3>{{ subtitle2 }}</h3>
+   <!-- <h3>{{ subtitle2 }}</h3>
     <p> {{text2}}
-    </p>
+    </p>-->
+
     {%if current_user.is_authenticated %}
     <button class="button" onclick='location.href="https://green-double-5000.codio.io/login"'>Your Fridge</button>
     {% else %}
@@ -27,3 +38,6 @@
 <button class="button" onclick='location.href="https://green-double-5000.codio.io/login"'>Login</button> -->
 
 {% endblock content %}
+    </style>
+    </head>
+</html>

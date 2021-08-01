@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+        <style>
+        body {
+        animation: fadeInAnimation ease 1s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+         margin: 2rem;
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
+         grid-gap: 2rem;
+         justify-content: center;
+        }
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+         :root {
+             --clr-primary: #b01a28;
+             --clr-primary-hover: #29e6a7;
+             --clr-primary-dark: #039d69;
+             --clr-gray100: #f0f7f8;
+             --clr-gray200: #cfd8dc;
+             --clr-gray300: #a7b7be;
+             --clr-gray400: #6b7e86;
+             --clr-gray500: #425a65;
+            /* border radius */
+             --radius: 0.2rem;
+        }
+         *, *::before, *::after {
+             box-sizing: border-box;
+             margin: 0;
+             padding: 0;
+        }
+         .card {
+             overflow: hidden;
+             box-shadow: 0px 2px 20px var(--clr-gray200);
+             border-radius: var(--radius);
+             background-color: #c8a4798f;
+             display: flex;
+             flex-direction: column;
+             justify-content: space-between;
+             cursor: pointer;
+             transition: transform 200ms ease-in;
+             
+        }
+        .card__image a{
+          position: absolute;
+          width:100%;
+          height:100%;
+          top:0px;
+          left:0px;
+        }
+         .card__image {
+             height: 12rem;
+             width: 100%;
+             object-fit: cover;
+             position: relative;
+        }
+         .card__title {
+             padding: 1rem;
+        }
+         .card__description {
+             padding: 0 1rem;
+        }
+         .card__btn {
+             padding: 1rem;
+             font-family: inherit;
+             font-weight: bold;
+             font-size: 1rem;
+             margin: 1rem;
+             border: 2px solid var(--clr-primary);
+             background: transparent;
+             color: var(--clr-primary);
+             border-radius: var(--radius);
+             transition: background 200ms ease-in, color 200ms ease-in;
+        }
+            
+         .card:hover {
+             background: #c19a6b;
+             transform: scale(1.02);
+        }
+         .card:hover .card__btn {
+             background: var(--clr-primary);
+             color: white;
+        }
+    </style>
+</head>
+  
+<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      <div class="container">
+        <a class="navbar-brand mr-4" href="/">We Have Food At Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+          <div class="navbar-nav mr-auto">
+            <a class="nav-item nav-link" href="/">Home</a>
+            <a class="nav-item nav-link" href="/about">About</a>
+            </div>
+             <div class="navbar-nav">
+             {%if current_user.is_authenticated %}
+              <a class="nav-item nav-link" href="/myFridge">My Fridge</a>
+              <a class="nav-item nav-link" href="/myRecipes">My Recipes</a>
+              <a class="nav-item nav-link" href="/myMealPlan">My Meal Plan</a>
+              <a class="nav-item nav-link" href="/logout">Logout</a>
+             {% endif %}
+                 
+              </div>
+            
+          </div>
+        </div>
+    </nav>
+ 
+<body>
+    {% block content %}{% endblock %}
+        
+
+
+</body>
+</html>
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+       <div class="alert alert-{{ category }}">
+         {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}

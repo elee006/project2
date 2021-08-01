@@ -3,6 +3,11 @@
     <h2>{{ subtitle }}</h2>
     <br/><br/>
     <h2>{{error}}</h2>
+    {% if f %}
+        <div class="alert alert-danger" role="alert">
+              {{ f }}
+        </div>
+    {% endif %}
    {% for stuff in content %}
         <article class="media content-section">
           <div class="media-body">
@@ -11,6 +16,7 @@
               <small class="text-muted">Cook time: {{ stuff[2] }} minutes</small>
             </div>
               <h2><a class="article-title" href="{{ stuff[8] }}" target ="_blank">{{ stuff[0] }}</a></h2>
+              
               <p><b>Ingredients</b></p>
              {% for i in stuff[4] %}
                   <small> {{i}} </small>
@@ -46,6 +52,9 @@
               {% endfor %}
              {% endfor %}  -->
           </div>
+            <br/>
+            <a href="/addrecipe/{{ stuff[9] }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Add to My Recipes</a>
         </article>
     {% endfor %}
+
 {% endblock content %}

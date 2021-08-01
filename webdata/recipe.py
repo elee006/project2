@@ -100,4 +100,24 @@ def html2plain(html):
     text = re.sub(r'^\n+', '', text)
     return text
 
+def getrecipe(id):
+    if id == '':
+        return "none"
+    name = ''
+    pic = ''
+    summary = ''
+    link = ''
+    url = create_url(id)
+    j = getjson(url)
+    for k,v in j.items():
+        name = j['title']
+        pic = j['image']
+        link = j['sourceUrl']
+        summary = BeautifulSoup(j['summary']).getText()
+    fix_name = (name[:25] + '...') if len(name) > 25 else name
+    fix_sum = (summary[:102] + '...') if len(summary) > 102 else summary
+    out = [fix_name,pic,fix_sum,link]
+    return out
+    
+
 

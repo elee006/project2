@@ -1,11 +1,19 @@
 body {
+ font-family: Oxygen, sans-serif;
  background: url("pexels-lukas-616401.jpg");
  background-color: #cccccc;
  background-size: 1720px 900px;
-  margin-top: 5rem;
+ padding-top: 70px;
+  /*margin-top: 5rem;*/
   animation: fadeInAnimation ease 3s
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+    
+/*   margin:2rem;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(12rem,16rem));
+  grid-gap:2rem;
+  justify-content:center; */
 }
   
 @keyframes fadeInAnimation {
@@ -20,6 +28,7 @@ body {
 h1, h2, h3, h4, h5, h6,text {
   color: #000000;
 }
+
 
 .bg-steel {
   background-color: #C19A6B;
@@ -115,7 +124,7 @@ button {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%;
+/*   width: 100%; */
 }
 
 /* Add a hover effect for buttons */
@@ -170,3 +179,25 @@ span.psw {
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
+#myVideo {
+    height: 90%;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+
+
+
+
+ 

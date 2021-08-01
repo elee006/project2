@@ -1,8 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class = "container">
-      <h2>{{ subtitle }}</h2>
-        <h4>Here is your fridge! Add or delete items, when satisfied click "Find Recipes".</h4> 
+<style>
+p {
+  background-color: white;
+  padding: 10px;
+  display: none;
+}
+  
+span:hover + p {
+  display: block;
+}
+</style>
+    <div class = "centered">
+      <h2>{{ subtitle }} <span>&#8505;</span><p>Here is your fridge! Add or delete items, when satisfied click "Find Recipes". </p></h2> 
+         
       <br/>
         <form action = "/myFridge" METHOD = "POST">
             <input type = "text" placeholder = "Enter an Ingredient" name = "item">
@@ -22,6 +33,12 @@
         </ul>
         <br/>
         <form action="/Recipes" METHOD = POST>
+                  <input type="checkbox" id="vegan" name="vegan" value="Vegan">
+                  <label for="vehicle1">Vegan</label><br>
+                  <input type="checkbox" id="vegetarian" name="vegetarian" value="Vegetarian">
+                  <label for="vehicle2"> Vegetarian</label><br>
+                  <input type="checkbox" id="gluten_free" name="gluten_free" value="Gluten Free">
+                  <label for="vehicle3"> Gluten Free</label><br><br>
             <input type="submit" value="Find Recipes" >
         </form>
         <small>*a maximum of 10 recpies will be returned, the larger the fridge the more accurate the results are</small>

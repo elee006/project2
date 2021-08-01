@@ -1,8 +1,8 @@
-from webdata.recipe import get_recipes
+from webdata.recipe import get_recipes,getrecipe
 
-test = ['nothing']
+test = ['eggs,']
 r = get_recipes(test)
-# for i in r:
+# for stiff in content:
 #     #i[0] = recipe name
 #     #i[1] = serving 
 #     #i[2] = time to cook
@@ -15,4 +15,6 @@ r = get_recipes(test)
 #     #i[9] = id
 #     print(i[6].key())
 #     print()
-print(r)
+test2 = 479101
+b = getrecipe(test2)
+print(b)
