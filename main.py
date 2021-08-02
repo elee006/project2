@@ -2,24 +2,30 @@ from flask import Flask, render_template, url_for, flash, redirect, request, ses
 from flask_login import login_required, logout_user, current_user, login_user, LoginManager, UserMixin
 from forms import RegistrationForm, loginForm, FridgeForm
 from flask_sqlalchemy import SQLAlchemy
+from flask_script import Manager
 from flask_behind_proxy import FlaskBehindProxy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from webdata import output
 from webdata.prices_walmart import *
 from webdata.recipe import get_recipes,getrecipe
+from flask_migrate import Migrate
 import requests
 import sqlite3
+
+
+
+
 
 app = Flask(__name__)
 proxied = FlaskBehindProxy(app) 
 app.config['SECRET_KEY'] = 'd552b24612de9b25e081844d77829297'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
-# con = sqlite3.connect("/home/codio/workspace/project2/site.db")
-# df = pd.read_sql_query("SELECT * Users", con)
-# print(df.head())
+
+
 
 login_manager = LoginManager(app)
 headers = {
@@ -35,7 +41,6 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(60), nullable=False)
     
     fridge = db.relationship('Fridge',backref = 'user', lazy = True)
-    #fridge_total = db.Column(db.Integer)
     #myrecipes = db.relationship('Recipes', backref = 'user', lazy = True)
     
     def set_password(self, password):
@@ -58,9 +63,9 @@ class Fridge (db.Model):
     item = db.Column(db.String(50), nullable = False )
     date = db.Column(db.DateTime, default = datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
-#     price = db.Column(db.String(50), nullable = False )
+    price = db.Column(db.String(50))
     def __repr__(self):
-        return f"Fridge('{self.item}')"
+        return f"Fridge('{self.item}','{self.price}')"
 
     
 
@@ -69,7 +74,7 @@ class SavedRecipes (db.Model):
     food_id = db.Column(db.String(10),unique= True ,nullable = False)
     food = db.Column(db.String(200),unique = True, nullable = False)
     image = db.Column(db.String(200),unique = True, nullable = False)
-#     link = db.Column(db.String(200),unique = True, nullable = False)
+    link = db.Column(db.String(200),unique = True, nullable = False)
     sum = db.Column(db.Text, nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
     date = db.Column(db.DateTime, default = datetime.utcnow)
@@ -78,15 +83,18 @@ class SavedRecipes (db.Model):
 
     
 
-#l = Fridge.query.order_by(user_id = 4).all() 
-#print(l)
-#t = [i.item for i in l]
+
+
 @login_manager.user_loader
 def load_user(user_id):
     """Check if user is logged-in on every page load."""
     if user_id is not None:
         return User.query.get(user_id)
     return None
+
+# l = Fridge.query.filter_by(user_id = 1).all() 
+# t = [i.item for i in l]
+# print(t)
 
 @app.route("/")
 def home():
@@ -98,7 +106,7 @@ def about():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit(): # checks if entries are valid
-        user = User(username=form.username.data, email=form.email.data, password=form.password.data) # fridge_total = meal_total(t)
+        user = User(username=form.username.data, email=form.email.data, password=form.password.data) 
 #         l = Fridge.query.order_by(Fridge.user_id = user.id).all() 
 #         print(l)
         user.set_password(form.password.data)
@@ -139,12 +147,15 @@ def myFridge():
 #         return redirect(url_for('myFridge'))
 #     return render_template('myFridge.html', subtitle= 'My Fridge', text='This is my Fridge')
     item_list = current_user.fridge
+    print(item_list)
+    items = [i.item for i in item_list]
     if request.method == "POST":
         item_name = request.form['item']
         new_item = Fridge(item = item_name , user = current_user)
         try:
             db.session.add(new_item)
             db.session.commit()
+            
             return render_template('myFridge.html', subtitle= 'My Fridge', text='This is my Fridge', ingredients = item_list)
         except:
             db.session.rollback()
@@ -158,6 +169,8 @@ def myFridge():
         #except:
     #    return "There was an Error!"
     else:
+        Fridge_total = meal_Price(items)
+        print(Fridge_total)
         #items = u.fridge
         return render_template('myFridge.html', subtitle= 'My Fridge', text='This is my Fridge', ingredients = item_list)
 
@@ -175,6 +188,8 @@ def Recipes():
     for food in current_user.fridge:
         ingredients.append(food.item)
     show_recipes = get_recipes(ingredients)
+    recipe_price = meal_Price(ingredients)
+    print(recipe_price)
     if show_recipes == []:
         return render_template('Recipes.html', subtitle= 'Recipes Found', error = message)
     else:
@@ -231,7 +246,7 @@ def myRecipes():
 @app.route('/addrecipe/<id>')
 def add(id):
     r = getrecipe(id)
-    r_add= SavedRecipes(food_id = id, food=r[0], image = r[1], sum = r[2], user_id = current_user.id )
+    r_add= SavedRecipes(food_id = id, food=r[0], image = r[1], sum = r[2], link = r[3], user_id = current_user.id )
     try:
         db.session.add(r_add)
         db.session.commit()

@@ -7,12 +7,15 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+       <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <script src="https://kit.fontawesome.com/f0d9323a54.js" crossorigin="anonymous"></script>
         <style>
         body {
         animation: fadeInAnimation ease 1s;
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
+            
          margin: 2rem;
          display: grid;
          grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
@@ -67,7 +70,7 @@
              height: 12rem;
              width: 100%;
              object-fit: cover;
-             position: relative;
+/*              position: relative; */
         }
          .card__title {
              padding: 1rem;
@@ -122,6 +125,12 @@
             
           </div>
         </div>
+             <div class="search-box">
+              <input class="search-txt" type="text2" name="" placeholder="type to search">
+              <a class="search-btn" href="">
+                <i class="fas fa-search"></i>
+              </a>
+          </div>
     </nav>
  
 <body>

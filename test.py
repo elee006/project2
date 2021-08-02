@@ -1,4 +1,5 @@
 from webdata.recipe import get_recipes,getrecipe
+from webdata.prices_walmart import *
 
 test = ['eggs,']
 r = get_recipes(test)
@@ -18,3 +19,6 @@ r = get_recipes(test)
 test2 = 479101
 b = getrecipe(test2)
 print(b)
+
+test = ["lettuce","broccoli", "cheese"]
+print(get_recipes(test))

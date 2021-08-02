@@ -51,7 +51,7 @@ def get_price_df(item):
     df.loc[len(df.index)] = [info['Walmart Details'], info['Price in ($)'], info['Price Per Quantity']]
     print(df)
     
-def price(item):
+def Price(item):
     url = "https://axesso-walmart-data-service.p.rapidapi.com/wlm/walmart-search-by-keyword"
     querystring = {"type":"text","keyword":item,"page":"1","sortBy":"best_match"}
 
@@ -73,8 +73,32 @@ def price(item):
 def meal_Price(ingredients):
     total_price = 0
     for ingredient in ingredients:
-        cost = price(str(ingredient))
+        cost = new_price(str(ingredient))
         total_price += cost
+    print(total_price)
     return total_price
-# get_price_df("potatoes")
+
+# food = ["lettuce","cheese", "onions"]
+# meal_Price(food)
+
+def new_price(text):
+
+    if len(text) > 1:
+        for i in text[0:-1]:
+            i = i + "20%"
+    url = "https://webknox-recipes.p.rapidapi.com/recipes/visualizePriceEstimator"
+
+    payload = "ingredientList=" +text+ "&servings=2&defaultCss=checked&mode=1"
+    headers = {
+        'content-type': "application/x-www-form-urlencoded",
+        'x-rapidapi-key': "02bb765496msh3d0c8b2dd4df115p112802jsna7217edf12e7",
+        'x-rapidapi-host': "webknox-recipes.p.rapidapi.com"
+        }
+
+    response = requests.request("POST", url, data=payload, headers=headers)
+    clean = cleanhtml(response.text)
+    clean = clean.split("$")[2]
+    return float(clean)
+
+# new_price("brocoli")
 

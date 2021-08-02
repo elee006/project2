@@ -4,16 +4,13 @@ body {
  background-color: #cccccc;
  background-size: 1720px 900px;
  padding-top: 70px;
-  /*margin-top: 5rem;*/
+/*  margin: 0;
+ padding: 0; */
+  margin-top: 5rem;
   animation: fadeInAnimation ease 3s
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
-    
-/*   margin:2rem;
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(12rem,16rem));
-  grid-gap:2rem;
-  justify-content:center; */
+  
 }
   
 @keyframes fadeInAnimation {
@@ -47,9 +44,9 @@ h1, h2, h3, h4, h5, h6,text {
 }
 
 .content-section {
-  background: #ffffff;
+  background: #949970;
   padding: 10px 20px;
-  border: 1px solid #dddddd;
+  border: 1px solid #c8a4798f;
   border-radius: 3px;
   margin-bottom: 20px;
 }
@@ -76,7 +73,7 @@ a.article-title:hover {
 .article-metadata {
   padding-bottom: 1px;
   margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
+  border-bottom: 1px solid #3b3923
 }
 
 .article-metadata a:hover {
@@ -116,6 +113,13 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
+input[type=text2], input[type=password2] {
+  width: 0px;
+  padding: initial;
+  margin: auto;
+  display: inline-block;
+}
+
 /* Set a style for all buttons */
 button {
   background-color: #C19A6B;
@@ -124,7 +128,7 @@ button {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-/*   width: 100%; */
+  width: 100%;
 }
 
 /* Add a hover effect for buttons */
@@ -153,7 +157,7 @@ img.avatar {
 
 /* Add padding to containers */
 .container {
-  padding: 16px;
+ 
 }
 
 /* The "Forgot password" text */
@@ -179,23 +183,65 @@ span.psw {
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
-#myVideo {
-    height: 90%;
-    left: 0;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-.content {
+/*#myVideo {
   position: fixed;
+  right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  color: #f1f1f1;
-  width: 100%;
-  padding: 20px;
-}
+  min-width: 100%;
+  min-height: 100%;
+}*/
 
+
+.search-box{
+    top: 50%;
+    left:50%;
+    transition: translate(-50%, -50%);
+    background: #f1e9c4a1;
+/*     height: 40px; */
+    border-radius: 40px;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin: 18px 10px;
+    
+}
+.search-box:hover > .search-txt{
+    width:240px;
+    padding:0 6px;
+}
+.search-btn:hover{
+    color:white
+}
+.search-btn{
+    color: #8c7e6b;
+    float: inherit;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: transparent;
+    display: inline;
+    justify-content: center;
+    align-items: center;
+}
+.search-txt{
+    border: none;
+    background: none;
+    outline: none;
+    float: inherit;
+    padding: 0;
+    color: #343a40;
+    font-size:16px;
+    transition: 0.4s;
+/*     line-height: 40px */
+    width: 0px;
+}
+.bi::before {
+  display: inline-block;
+  content: "";
+  vertical-align: -.125em;
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z' clip-rule='evenodd'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 1rem 1rem;
+}
 
 
 
