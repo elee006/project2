@@ -7,15 +7,23 @@
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet"> 
+<!--     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}"> -->
     <script src="https://kit.fontawesome.com/f0d9323a54.js" crossorigin="anonymous"></script>
     
         <style>
         body {
+             font-family: Oxygen, sans-serif;
             animation: fadeInAnimation ease 1s;
             animation-iteration-count: 1;
             animation-fill-mode: forwards;
+            background: url("../static/pexels-lukas-616401.jpg");
+         background-color: #cccccc;
+         background-size: 1720px 900px;
+         padding-top: 70px;
+/*          margin: 50;
+         padding: 0; */
+          margin-top: 5rem;
         }
         @keyframes fadeInAnimation {
             0% {
@@ -25,6 +33,266 @@
                 opacity: 1;
             }
         }
+
+        h1, h2, h3, h4, h5, h6,text {
+          color: #000000;
+        }
+
+
+        .bg-steel {
+          background-color: #C19A6B;
+        }
+
+        .site-header .navbar-nav .nav-link {
+          color: #cbd5db;
+        }
+
+        .site-header .navbar-nav .nav-link:hover {
+          color: #ffffff;
+        }
+
+        .site-header .navbar-nav .nav-link.active {
+          font-weight: 500;
+        }
+
+        .content-section {
+          background: #949970;
+          padding: 10px 20px;
+          border: 1px solid #c8a4798f;
+          border-radius: 3px;
+          margin-bottom: 20px;
+        }
+
+        .article-title {
+          color: #444444;
+        }
+
+        a.article-title:hover {
+          color: #428bca;
+          text-decoration: none;
+        }
+
+        .article-content {
+          white-space: pre-line;
+        }
+
+        .article-img {
+          height: 65px;
+          width: 65px;
+          margin-right: 16px;
+        }
+
+        .article-metadata {
+          padding-bottom: 1px;
+          margin-bottom: 4px;
+          border-bottom: 1px solid #3b3923
+        }
+
+        .article-metadata a:hover {
+          color: #333;
+          text-decoration: none;
+        }
+
+        .article-svg {
+          width: 25px;
+          height: 25px;
+          vertical-align: middle;
+        }
+
+        .account-img {
+          height: 125px;
+          width: 125px;
+          margin-right: 20px;
+          margin-bottom: 16px;
+        }
+
+        .account-heading {
+          font-size: 2.5rem;
+        }
+
+        /* Bordered form */
+        /*form {
+          border: 3px solid #f1f1f1;
+        }/*
+
+        /* Full-width inputs */
+        input[type=text], input[type=password] {
+          width: 100%;
+          padding: 12px 20px;
+          border-radius: .25rem;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+        }
+
+        input[type=text2], input[type=password2] {
+          width: 0px;
+          padding: initial;
+          margin: auto;
+          display: inline-block;
+        }
+
+        /* Set a style for all buttons */
+        button {
+          background-color: #C19A6B;
+          color: white;
+          padding: 10px 20px;
+          margin: 8px 0;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+        }
+
+        button[type = button2]{
+          background-color:#841c25;
+          color: white;
+          border: none;
+          cursor: pointer;
+          border-radius: 6px;
+
+        }
+
+        /* Add a hover effect for buttons */
+        button:hover {
+          opacity: 0.8;
+        }
+
+        /* Extra style for the cancel button (red) */
+        .cancelbtn {
+          width: auto;
+          padding: 10px 18px;
+          background-color: #f44336;
+        }
+
+        /* Center the avatar image inside this container */
+        .imgcontainer {
+          text-align: center;
+          margin: 24px 0 12px 0;
+        }
+
+        /* Avatar image */
+        img.avatar {
+          width: 40%;
+          border-radius: 50%;
+        }
+
+        /* Add padding to containers */
+        .container {
+
+        }
+
+        /* The "Forgot password" text */
+        span.psw {
+          float: right;
+          padding-top: 16px;
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+          span.psw {
+            display: block;
+            float: none;
+          }
+          .cancelbtn {
+            width: 100%;
+          }
+        }
+        .centered {
+          position: absolute;
+/*           top: 50%; */
+          left: 50%;
+          /* bring your own prefixes */
+          transform: translate(-50%, -50%);
+        }
+        /*#myVideo {
+          position: fixed;
+          right: 0;
+          bottom: 0;
+          min-width: 100%;
+          min-height: 100%;
+        }*/
+
+        .search-box{
+            top: 50%;
+            left:50%;
+            transition: translate(-50%, -50%);
+            background: #f1e9c4a1;
+        /*     height: 40px; */
+            border-radius: 40px;
+            padding: 10px;
+            margin-bottom: 20px;
+            margin: 18px 10px;
+
+        }
+        .search-box:hover > .search-txt{
+            width:240px;
+            padding:0 6px;
+        }
+        .search-btn:hover{
+            color:white
+        }
+        .search-btn{
+            color: #8c7e6b;
+            float: inherit;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: transparent;
+            display: inline;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-txt{
+            border: none;
+            background: none;
+            outline: none;
+            float: inherit;
+            padding: 0;
+            color: #343a40;
+            font-size:16px;
+            transition: 0.4s;
+        /*     line-height: 40px */
+            width: 0px;
+        }
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+            }
+ /* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}           
+
+
+ 
     </style>
 </head>
 <body>
@@ -52,13 +320,18 @@
           {%if current_user.is_authenticated %}
           <a class="nav-item nav-link" href="/logout">Logout</a>
           {% endif %}
-          </div> 
-           <div class="search-box">
-              <input class="search-txt" type="text2" name="" placeholder="Quick Search">
-              <a class="search-btn" href="">
-                <i class="fas fa-search"></i>
-              </a>
           </div>
+           <form name = "myform" action="{{ url_for('search') }}" METHOD ='POST'>
+               <div class="search-box">
+                  <input class="search-txt" type="text2" name="query" placeholder="Quick Search">
+                   
+                   <i class="search-btn" type ="button2" href="/searchresults">
+                    <i class="fas fa-search"></i>
+                   </i>
+                  
+          </div>
+          </form>
+          
 
       </div>
     </nav>

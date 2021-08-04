@@ -3,74 +3,12 @@
     <h2>{{ subtitle }}</h2>
     <br/><br/>
     <h2>{{error}}</h2>
-<!-- Full screen modal -->   
- <!--  <button class="button" id ="myBtn1">Calories</button>-->
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<!-- Bootstrap library -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<!-- Trigger the modal with a button -->
-<button type="button" class="button">Calories</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Calories</h4>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-$('.button').on('click',function(){
-    $('.modal-body').load('../Calories.html',function(){
-        $('#myModal').modal({show:true});
-    });
-});
-</script>
-    
     {% if f %}
         <div class="alert alert-danger" role="alert">
               {{ f }}
         </div>
     {% endif %}
-   
    {% for stuff in content %}
-        {% if vg|length %}
-            {% if stuff[10] == False %}
-                {% continue %}
-            {% endif %}
-        {% endif %}
-
-        {% if ve|length %}
-            {% if stuff[11] == False %}
-                {% continue %}
-            {% endif %}
-        {% endif %}
-
-        {% if g|length %}
-            {% if stuff[12] == False %}
-                {% continue %}
-            {% endif %}
-        {% endif %}
-
-        {% if d|length %}
-            {% if stuff[13] == False %}
-                {% continue %}
-            {% endif %}
-        {% endif %}
-
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">

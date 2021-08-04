@@ -44,7 +44,7 @@ def dataframe(dic):
     return df
 
 def output(lis):
-    num_of_rep = '10'
+    num_of_rep = '20'
     q = makequery(lis,num_of_rep)
     r = getjson(q)
     m = getinfo(r)

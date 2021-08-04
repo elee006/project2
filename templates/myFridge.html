@@ -11,7 +11,10 @@ span:hover + p {
   display: block;
 }
 </style>
-    <div class = "centered">
+<body>
+    
+
+    <div>
       <h2>{{ subtitle }} <span>&#8505;</span><p>Here is your fridge! Add or delete items, when satisfied click "Find Recipes". </p></h2> 
          
       <br/>
@@ -38,11 +41,13 @@ span:hover + p {
                   <input type="checkbox" id="vegetarian" name="vegetarian" value="Vegetarian">
                   <label for="vehicle2"> Vegetarian</label><br>
                   <input type="checkbox" id="gluten_free" name="gluten_free" value="Gluten Free">
-                  <label for="vehicle3"> Gluten Free</label><br><br>
+                  <label for="vehicle3"> Gluten Free</label><br>
+                  <input type="checkbox" id="dairy" name="dairy" value="Dairy Free">
+                  <label for="vehicle4"> Dairy Free</label><br><br>
             <input type="submit" value="Find Recipes" >
         </form>
         <small>*a maximum of 10 recpies will be returned, the larger the fridge the more accurate the results are</small>
             <button class="button" onclick='location.href="https://green-double-5000.codio.io/logout"'>Logout</button>
     </div>
-
+</body>
 {% endblock content %}

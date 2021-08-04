@@ -2,9 +2,12 @@ import requests
 from webdata import output
 from html2text import HTML2Text
 from bs4 import BeautifulSoup
+from webdata.search import search_recipes
 import mistletoe
-
-
+import pandas as pd
+import numpy as np
+import plotly.express as px
+from webdata.prices_walmart import *
 
 
 headers = {
@@ -26,6 +29,10 @@ def getinfo(json):
     servings = ''
     time = ''
     summary = ''
+    vegan = ''
+    vegetarian = ''
+    dairy = ''
+    gluten = ''
     m = []
     o = []
     ingredients_list =[]
@@ -33,10 +40,17 @@ def getinfo(json):
     nutrients ={}
     for k,v in json.items():
         name = json['title']
+        vegan = json['vegan']
+        vegetarian = json['vegetarian']
+        dairy = json['dairyFree']
+        gluten = json['glutenFree']
         servings = json['servings']
         time = json['readyInMinutes']
         source = json['sourceUrl']
-        image = json['image']
+        if 'image' in json:
+            image = json['image']
+        else:
+            image = 'https://i.postimg.cc/htCvg6qH/No-Image-Found-400x264.png'
         id = json['id']
         summary = BeautifulSoup(json['summary']).getText()
         m = json["extendedIngredients"]
@@ -55,11 +69,13 @@ def getinfo(json):
                     for key,val in num.items():
                         if key == 'step':
                             instructions.append(val)
-    info_list = [name,servings,time,summary,ingredients_list,instructions,nutrients,image,source,id]
+    info_list = [name,servings,time,summary,ingredients_list,instructions,nutrients,image,source,id, vegan, vegetarian,gluten,dairy]
     return(info_list)
 
-def get_recipes(list):
+    
+def get_recipes(list, option = None):
     res = []
+    
     run = output(list)
     ids = []
     for i in run:
@@ -72,6 +88,79 @@ def get_recipes(list):
         i = getinfo(j)
         res.append(i)
     return res
+
+def get_data(test):
+    new_list = []
+    calories = []
+    carbs = []
+    proteins = []
+    prices = []
+    food_names = []
+    dictionary = {}
+    col_names = ['Recipe Name', 'Recipe Price', 'Calories', 'Carbs', 'Proteins']
+    for i in test:
+        new_list.append(i[4])
+        calories.append(i[6]['Calories'][0])
+        carbs.append(i[6]['Carbohydrates'][0])
+        proteins.append(i[6]['Protein'][0])
+        food_names.append(i[0])
+    text = []
+    for o in new_list:
+        string = []
+        for words in o:
+            if "," in words:
+                replace = words.split(",")
+                words = replace[0]
+                if words[-1].isalpha() == False:
+                    words = words[:-2]
+            elif "I" in words:
+                replace = words.split("I")
+                words = replace[0]
+                if words[-1].isalpha() == False:
+                    words = words[:-2]
+            string.append(words)
+        text.append(string)
+
+    for recipes in text:
+        prices.append(meal_Price(recipes))
+    df = pd.DataFrame(columns = col_names)
+    df['Recipe Name'] = food_names
+    df['Recipe Price'] = prices
+    df['Calories'] = calories
+    df['Carbs'] = carbs
+    df['Proteins'] = proteins
+    return df
+
+def Calories(df):
+    fig = px.scatter(df, x=df['Recipe Name'], y= df['Calories'], color=df['Calories'], title = 'Calories', size = df["Recipe Price"])
+    fig.update_traces(mode="markers+lines")
+    fig.write_html('templates/Calories.html')
+
+def Proteins(df):
+    fig = px.scatter(df, x=df['Recipe Name'], y= df['Proteins'], title = 'Proteins', color=df['Calories'], size = df["Recipe Price"])
+    fig.update_traces(mode="markers+lines")
+    fig.write_html('templates/proteins.html')
+    
+def Carbs(df):
+    fig = px.scatter(df, x=df['Recipe Name'], y= df['Carbs'], title = 'Carbs', color=df['Calories'], size = df["Recipe Price"])
+    fig.update_traces(mode="markers+lines")
+    fig.write_html('templates/carbs.html')
+    
+def prices(df):
+    fig = px.scatter(df, x=df['Recipe Name'], y= df['Recipe Price'], title = 'Recipe Prices', color=df['Calories'], size = df["Recipe Price"])
+    fig.update_traces(mode="markers+lines")
+    fig.write_html('templates/prices.html')
+    
+def get_recipes_search(query):
+    ids = search_recipes(query)
+    res=[]
+    for id in ids:
+        url = create_url(id)
+        j = getjson(url)
+        i = getinfo(j)
+        res.append(i)
+    return res
+    
 
 def html2md(html):
     parser = HTML2Text()
@@ -108,6 +197,8 @@ def getrecipe(id):
     pic = ''
     summary = ''
     link = ''
+    servings = ''
+    time = ''
     url = create_url(id)
     j = getjson(url)
     for k,v in j.items():

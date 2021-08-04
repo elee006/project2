@@ -1,6 +1,62 @@
-{% extends "layout.html" %}
+{% extends "layout2.html" %}
 {% block content %}
-    <h2>{{ subtitle }}</h2>
-    <p>{{ text }}</p>
+
+
+<!-- Button trigger modal -->
+
+<button type="button2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Generate Daily Meal Plan
+</button>  
+
+
+
+<!-- Modal -->
+<body>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Input Calorie Goal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action = "/myMealPlan" METHOD = "POST">
+            <input type = "text" placeholder = "Calories" name = "cal">
+            <input type = "text" placeholder = "Exclude ingredients" name = "ex">
+             <select class="form-control" name="option">
+                 <option value = 'No Preference'>No Preference</option>
+                 <option value="Vegan">Vegan</option>
+                 <option value="Vegetarian">Vegetarian</option>
+                 <option value="Gluten free">Gluten free</option>
+                 <option value="Dairy free">Dairy free</option>
+             </select><br>
+            <input type = "submit" value = "Generate Daily Meal Plan" class = "btn btn-secondary">
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<p>Calories:{{ cal }}, Proteins: {{ pro }}g, Fat: {{ fat }}g, Carbohydrates: {{ carb }}g</p>
+    {% for item, val in text.items() %}
+      <div class="card">
+
+        <div class="card__body">
+            <a><img src='{{ val[1] }}' alt="" class="card__image"></a>
+          <h2 class="card__title">{{ item }}</h2>
+          <p class="card__description">{{ val[0] }}</p>
+        </div>
+        <form action="{{ val[2] }}" target ="_blank">
+        <button class="card__btn">View Recipe </button>
+        </form>
+      </div>
+       {% endfor %}
+
+
+
+
+
+
 
 {% endblock content %}

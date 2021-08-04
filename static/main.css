@@ -1,11 +1,10 @@
 body {
- font-family: Oxygen, sans-serif;
  background: url("pexels-lukas-616401.jpg");
  background-color: #cccccc;
  background-size: 1720px 900px;
- padding-top: 70px;
-/*  margin: 0;
- padding: 0; */
+ padding-top: 7000px;
+ margin: 50;
+ padding: 0;
   margin-top: 5rem;
   animation: fadeInAnimation ease 3s
   animation-iteration-count: 1;
@@ -124,11 +123,19 @@ input[type=text2], input[type=password2] {
 button {
   background-color: #C19A6B;
   color: white;
-  padding: 14px 20px;
+  padding: 10px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 100%;
+}
+
+button[type = button2]{
+  background-color: #C19A6B;
+  color: white;
+  border: none;
+  cursor: pointer;
+
 }
 
 /* Add a hover effect for buttons */
@@ -234,14 +241,7 @@ span.psw {
 /*     line-height: 40px */
     width: 0px;
 }
-.bi::before {
-  display: inline-block;
-  content: "";
-  vertical-align: -.125em;
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z' clip-rule='evenodd'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 1rem 1rem;
-}
+
 
 
 
