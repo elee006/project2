@@ -14,7 +14,7 @@ pytest
 pycodestyle
 requests
 pandas
-sqlite3
+
 os 
 string 
 re
