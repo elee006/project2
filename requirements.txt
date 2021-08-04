@@ -12,5 +12,4 @@ flask_sqlalchemy
 flask_login
 pytest
 pycodestyle
-Flask-Migrate==3.1.0
-Flask-Script==2.0.6
+

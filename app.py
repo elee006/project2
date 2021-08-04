@@ -4,7 +4,6 @@ from flask_login import login_required, logout_user
 from flask_login import current_user, login_user, LoginManager, UserMixin
 from forms import RegistrationForm, loginForm, FridgeForm
 from flask_sqlalchemy import SQLAlchemy
-from flask_script import Manager
 from flask_behind_proxy import FlaskBehindProxy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -13,7 +12,6 @@ from webdata.prices_walmart import *
 from webdata.search import search_recipes
 from webdata.recipe import *
 from webdata.meal import *
-from flask_migrate import Migrate
 import requests
 import sqlite3
 
