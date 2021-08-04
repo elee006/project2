@@ -15,7 +15,7 @@ pycodestyle
 requests
 pandas
 
-os 
+
 string 
 re
 bs4
