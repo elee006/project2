@@ -16,3 +16,6 @@ requests
 pandas
 
 
+bs4
+html2text
+
