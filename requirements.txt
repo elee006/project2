@@ -13,3 +13,15 @@ flask_login
 pytest
 pycodestyle
 requests
+pandas
+json
+sqlite3
+os 
+string 
+re
+bs4
+html2text
+numpy
+plotly
+time
+datetime
