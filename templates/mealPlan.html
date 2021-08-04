@@ -3,12 +3,17 @@
 
 
 <!-- Button trigger modal -->
-
+<footer>
 <button type="button2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Generate Daily Meal Plan
-</button>  
-
-
+  Generate New Daily Meal Plan
+</button>
+<div>
+    <h3>{{ cal }}</h3>
+    <h3>{{ pro }}</h3> 
+    <h3>{{ fat }}</h3>
+    <h3>{{ carb }}</h3>
+</div>
+</footer>
 
 <!-- Modal -->
 <body>
@@ -31,15 +36,13 @@
                  <option value="Dairy free">Dairy free</option>
              </select><br>
             <input type = "submit" value = "Generate Daily Meal Plan" class = "btn btn-secondary">
-
         </form>
       </div>
     </div>
   </div>
 </div>
 </body>
-<p>Calories:{{ cal }}, Proteins: {{ pro }}g, Fat: {{ fat }}g, Carbohydrates: {{ carb }}g</p>
-    {% for item, val in text.items() %}
+{% for item, val in text.items() %}
       <div class="card">
 
         <div class="card__body">
@@ -51,12 +54,6 @@
         <button class="card__btn">View Recipe </button>
         </form>
       </div>
-       {% endfor %}
-
-
-
-
-
-
+ {% endfor %}
 
 {% endblock content %}

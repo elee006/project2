@@ -30,6 +30,12 @@ r = get_recipes(test)
 ex = {'Calories':"2000", 'Exclude':"salt, butter", 'Option': ""}
 print(get_meals(ex))
 
-
-    
+#         try:
+#             db.session.execute(delete_q)
+#             db.session.commit()
+#         except:
+#             for recipe in plan:
+#                 data[recipe.food] = [recipe.sum, recipe.image, recipe.link]
+#                 db.session.add(recipe)
+#                 db.session.commit()
     

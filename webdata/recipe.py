@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 from webdata.prices_walmart import *
+import time
 
 
 headers = {
@@ -74,14 +75,11 @@ def getinfo(json):
 
     
 def get_recipes(list, option = None):
-    res = []
-    
+    res = []    
     run = output(list)
     ids = []
     for i in run:
         ids.append(i['ID'])
-
-
     for id in ids:
         url = create_url(id)
         j = getjson(url)
@@ -90,20 +88,22 @@ def get_recipes(list, option = None):
     return res
 
 def get_data(test):
+    
     new_list = []
     calories = []
     carbs = []
     proteins = []
-    prices = []
     food_names = []
     dictionary = {}
-    col_names = ['Recipe Name', 'Recipe Price', 'Calories', 'Carbs', 'Proteins']
+    col_names = ['Recipe Name', 'Recipe Price', 'Calories', 'Carbs (g)', 'Proteins (g)']
     for i in test:
+        print(i[3])
+        print("")
         new_list.append(i[4])
         calories.append(i[6]['Calories'][0])
         carbs.append(i[6]['Carbohydrates'][0])
         proteins.append(i[6]['Protein'][0])
-        food_names.append(i[0])
+        food_names.append(i[0])    
     text = []
     for o in new_list:
         string = []
@@ -120,36 +120,34 @@ def get_data(test):
                     words = words[:-2]
             string.append(words)
         text.append(string)
-
-    for recipes in text:
-        prices.append(meal_Price(recipes))
+    t1 = time.perf_counter()
+    t2 = time.perf_counter()
     df = pd.DataFrame(columns = col_names)
     df['Recipe Name'] = food_names
-    df['Recipe Price'] = prices
     df['Calories'] = calories
-    df['Carbs'] = carbs
-    df['Proteins'] = proteins
+    df['Carbs (g)'] = carbs
+    df['Proteins (g)'] = proteins    
     return df
 
 def Calories(df):
-    fig = px.scatter(df, x=df['Recipe Name'], y= df['Calories'], color=df['Calories'], title = 'Calories', size = df["Recipe Price"])
+    fig = px.scatter(df, x=df['Recipe Name'], y= df['Calories'], color=df['Calories'], title = 'Calories', size = df["Calories"])
     fig.update_traces(mode="markers+lines")
-    fig.write_html('templates/Calories.html')
+    fig.write_html('project2/templates/Calories.html')
 
 def Proteins(df):
-    fig = px.scatter(df, x=df['Recipe Name'], y= df['Proteins'], title = 'Proteins', color=df['Calories'], size = df["Recipe Price"])
+    fig = px.scatter(df, x=df['Recipe Name'], y= df['Proteins (g)'], title = 'Proteins', color=df['Calories'], size = df["Calories"])
     fig.update_traces(mode="markers+lines")
-    fig.write_html('templates/proteins.html')
+    fig.write_html('project2/templates/proteins.html')
     
 def Carbs(df):
-    fig = px.scatter(df, x=df['Recipe Name'], y= df['Carbs'], title = 'Carbs', color=df['Calories'], size = df["Recipe Price"])
+    fig = px.scatter(df, x=df['Recipe Name'], y= df['Carbs (g)'], title = 'Carbs', color=df['Calories'], size = df["Calories"])
     fig.update_traces(mode="markers+lines")
-    fig.write_html('templates/carbs.html')
+    fig.write_html('project2/templates/carbs.html')
     
-def prices(df):
-    fig = px.scatter(df, x=df['Recipe Name'], y= df['Recipe Price'], title = 'Recipe Prices', color=df['Calories'], size = df["Recipe Price"])
-    fig.update_traces(mode="markers+lines")
-    fig.write_html('templates/prices.html')
+# def prices(df):
+#     fig = px.scatter(df, x=df['Recipe Name'], y= df['Recipe Price'], title = 'Recipe Prices', color=df['Calories'], size = df["Recipe Price"])
+#     fig.update_traces(mode="markers+lines")
+#     fig.write_html('templates/prices.html')
     
 def get_recipes_search(query):
     ids = search_recipes(query)

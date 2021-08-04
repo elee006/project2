@@ -2,6 +2,7 @@ from webdata.recipe import *
 from webdata.prices_walmart import *
 from webdata.search import search_recipes
 import pandas as pd
+import time
 
 # test = ['eggs,']
 # r = get_recipes(test)
@@ -22,11 +23,15 @@ import pandas as pd
 # b = getrecipe(test2)
 # # print(b)
 
-test = ["flour", "rice","sugar"]
+test = ["turkey", "bacon", "toast", "cheese"]
+t1 = time.perf_counter()
 info = get_recipes(test)
 df = get_data(info)
-print(df)
-Calories(df)
+# t2 = time.perf_counter()
+# print(f"Functions took {t2 - t1:0.4f} seconds")
+# tic = time.perf_counter()
+# Calories(df)
 # Proteins(df)
 # Carbs(df)
-# prices(df)
+# toc = time.perf_counter()
+# print(f"Functions took {toc - tic:0.4f} seconds")

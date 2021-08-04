@@ -3,42 +3,10 @@
     <h2>{{ subtitle }}</h2>
     <br/><br/>
     <h2>{{error}}</h2>
-<!-- Full screen modal -->   
- <!--  <button class="button" id ="myBtn1">Calories</button>-->
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- Bootstrap library -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<!-- Trigger the modal with a button -->
-<button type="button" class="button">Calories</button>
+   <p>Here is a graph of all the Recipe's <a href="https://green-double.codio.io/project2/templates/Calories.html" target ="_blank">Calories</a>, <a href="https://green-double.codio.io/project2/templates/carbs.html" target ="_blank">Carbs</a>
+ or <a href="https://green-double.codio.io/project2/templates/proteins.html" target ="_blank">Protein</a></p>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Calories</h4>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-$('.button').on('click',function(){
-    $('.modal-body').load('../Calories.html',function(){
-        $('#myModal').modal({show:true});
-    });
-});
-</script>
     
     {% if f %}
         <div class="alert alert-danger" role="alert">

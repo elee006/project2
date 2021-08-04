@@ -247,12 +247,10 @@ def Recipes():
             subtitle='Recipes Found',
             error=message)
     else:
-        df = get_recipes(ingredients)
-        print(df)
-#         Calories(df)
-#         Proteins(df)
-#         Carbs(df)
-#         prices(df)
+        df = get_data(show_recipes)
+        Calories(df)
+        Proteins(df)
+        Carbs(df)
         return render_template(
             'Recipes.html',
             subtitle='Recipes Found',
@@ -335,14 +333,16 @@ def MealPlan():
                     link = r[3],
                     user_id = current_user.id)
             plan.append(r_add)
-        print(plan)
-        cal = info[1]["calories"]
-        pro = info[1]["protein"]
-        fat = info[1]["fat"]
-        carb = info[1]["carbohydrates"]
+        cal = "Calories: {}".format(info[1]["calories"])
+        pro = "Proteins: {}g".format(info[1]["protein"])
+        fat = "Fat: {}g".format(info[1]["fat"])
+        carb = "Carbohydrates: {}g".format(info[1]["carbohydrates"])
+        
         for recipe in plan:
             data[recipe.food] = [recipe.sum, recipe.image, recipe.link]
-            
+
+                
+                
     return render_template('mealPlan.html', subtitle="My Meal Plan", text = data, cal = cal, pro = pro, fat = fat, carb = carb)
 
 
