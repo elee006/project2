@@ -16,11 +16,3 @@ requests
 pandas
 
 
-
-re
-bs4
-html2text
-numpy
-plotly
-time
-datetime
