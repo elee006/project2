@@ -27,7 +27,7 @@ def getinfo(response):
     mainlis = []
     for i in response:
         dic = {}
-        if int(i['missedIngredientCount'])>3:
+        if int(i['missedIngredientCount'])>4:
             continue
         id = i['id']
         name = i['title']
