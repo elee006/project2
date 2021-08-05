@@ -34,6 +34,7 @@ jobs:
           pip3 install flask-sqlalchemy
           pip3 install email-validator
           pip3 install flask_bcrypt
+          pip3 install -U kaleido
           
           
       - name: Lint with pycodestyle

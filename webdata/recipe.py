@@ -9,7 +9,7 @@ import numpy as np
 import plotly.express as px
 from webdata.prices_walmart import *
 import time
-
+import plotly
 
 headers = {
     'x-rapidapi-key': "cdcc19f7bemshcaafa6b12f20c45p1ec5eajsn982786737a25",
@@ -97,8 +97,6 @@ def get_data(test):
     dictionary = {}
     col_names = ['Recipe Name', 'Recipe Price', 'Calories', 'Carbs (g)', 'Proteins (g)']
     for i in test:
-        print(i[3])
-        print("")
         new_list.append(i[4])
         calories.append(i[6]['Calories'][0])
         carbs.append(i[6]['Carbohydrates'][0])
@@ -132,17 +130,22 @@ def get_data(test):
 def Calories(df):
     fig = px.scatter(df, x=df['Recipe Name'], y= df['Calories'], color=df['Calories'], title = 'Calories', size = df["Calories"])
     fig.update_traces(mode="markers+lines")
-    fig.write_html('templates/Calories.html')
+    fig.write_html("static/Calories.html")
+    plotly.offline.plot(fig, filename='Calories2.html')
 
 def Proteins(df):
     fig = px.scatter(df, x=df['Recipe Name'], y= df['Proteins (g)'], title = 'Proteins', color=df['Calories'], size = df["Calories"])
     fig.update_traces(mode="markers+lines")
-    fig.write_html('templates/proteins.html')
+    fig.write_html("static/proteins.html")
+    plotly.offline.plot(fig, filename='proteins2.html')
     
 def Carbs(df):
     fig = px.scatter(df, x=df['Recipe Name'], y= df['Carbs (g)'], title = 'Carbs', color=df['Calories'], size = df["Calories"])
     fig.update_traces(mode="markers+lines")
-    fig.write_html('templates/carbs.html')
+    fig.write_html("static/carbs.html")
+    plotly.offline.plot(fig, filename='carbs2.html')
+
+
     
 # def prices(df):
 #     fig = px.scatter(df, x=df['Recipe Name'], y= df['Recipe Price'], title = 'Recipe Prices', color=df['Calories'], size = df["Recipe Price"])
