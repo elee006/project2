@@ -132,17 +132,17 @@ def get_data(test):
 def Calories(df):
     fig = px.scatter(df, x=df['Recipe Name'], y= df['Calories'], color=df['Calories'], title = 'Calories', size = df["Calories"])
     fig.update_traces(mode="markers+lines")
-    fig.write_html('project2/templates/Calories.html')
+    fig.write_html('templates/Calories.html')
 
 def Proteins(df):
     fig = px.scatter(df, x=df['Recipe Name'], y= df['Proteins (g)'], title = 'Proteins', color=df['Calories'], size = df["Calories"])
     fig.update_traces(mode="markers+lines")
-    fig.write_html('project2/templates/proteins.html')
+    fig.write_html('templates/proteins.html')
     
 def Carbs(df):
     fig = px.scatter(df, x=df['Recipe Name'], y= df['Carbs (g)'], title = 'Carbs', color=df['Calories'], size = df["Calories"])
     fig.update_traces(mode="markers+lines")
-    fig.write_html('project2/templates/carbs.html')
+    fig.write_html('templates/carbs.html')
     
 # def prices(df):
 #     fig = px.scatter(df, x=df['Recipe Name'], y= df['Recipe Price'], title = 'Recipe Prices', color=df['Calories'], size = df["Recipe Price"])
