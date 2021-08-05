@@ -18,4 +18,6 @@ pandas
 
 bs4
 html2text
+mistletoe
+plotly
 
