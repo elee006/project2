@@ -112,9 +112,9 @@ def load_user(user_id):
 def home():
     return render_template(
         'home.html',
-        subtitle='Home Page',
-        subtitle2='Welcome to "We Have Food At Home"',
-        text2="""""ave you ever wanted McDonalds, but your mom tells you
+        subtitle='Welcome to',
+        subtitle2='"We Have Food At Home"',
+        text2="""""Have you ever wanted McDonalds, but your mom tells you
         'No because we have food at home'?
         Have you ever been too lazy to go out to eat?
         Are you trying to save money? Well this is the place for you!!""")

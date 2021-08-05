@@ -2,20 +2,36 @@
 {% block content %}
 <style>
 p {
-  background-color: white;
-  padding: 10px;
+  background-color: #ffffff00;
+    color:#842029;
+  font-size:20px;
+    font-weight:bold;
   display: none;
 }
   
 span:hover + p {
   display: block;
 }
+li.list-group-item {
+    position: relative;
+    display: block;
+    padding: .5rem 1rem;
+    color: #212529;
+    text-decoration: none;
+    background-color: #c1c5aa;
+    border: 1px solid rgba(0,0,0,.125);
+}
+ul.list-group-flush {
+    border-radius: 20px;
+}
+    
+
 </style>
 <body>
     
 
     <div>
-      <h2>{{ subtitle }} <span>&#8505;</span><p>Here is your fridge! Add or delete items, when satisfied click "Find Recipes". </p></h2> 
+      <h2>{{ subtitle }} <span>&#8505;</span><p>Here is your fridge! Add or delete items, when satisfied click "Find Recipes.<br> A maximum of 20 recpies will be returned that have no less than 5 missing from your fridge.</p></h2> 
          
       <br/>
         <form action = "/myFridge" METHOD = "POST">
@@ -46,7 +62,6 @@ span:hover + p {
                   <label for="vehicle4"> Dairy Free</label><br><br>
             <input type="submit" value="Find Recipes" >
         </form>
-        <small>*a maximum of 10 recpies will be returned, the larger the fridge the more accurate the results are</small>
             <button class="button" onclick='location.href="/logout"'>Logout</button>
     </div>
 </body>

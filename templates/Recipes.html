@@ -1,10 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
+<style>
+    p.top {
+      background-color: #ffffff00;
+        color:#841c25;
+      font-size:20px;
+   
+    
+}
+</style>
     <h2>{{ subtitle }}</h2>
     <br/><br/>
     <h2>{{error}}</h2>
 
-   <p>Here is a graph of all the Recipe's <a href="static/Calories.html" target ="_blank">Calories</a>, <a href="static/carbs.html" target ="_blank">Carbs</a>
+   <p class ="top">Here is a graph of all the Recipe's <a href="static/Calories.html" target ="_blank">Calories</a>, <a href="static/carbs.html" target ="_blank">Carbs</a>
  or <a href="static/proteins.html" target ="_blank">Protein</a></p>
 
     

@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout3.html" %}
 {% block content %}
 
 
@@ -10,18 +10,29 @@
 
 </div> -->
 
-<div>
-          <video width="700" height="500" autoplay muted loop>
-          <source src="static/home.mp4" type="video/mp4">
-          Your browser does not support HTML5 video.
-        </video>
-        {%if current_user.is_authenticated %}
-    <button class="button" onclick='location.href="/login"'>Your Fridge</button>
-    {% else %}
-    <button class="button" onclick='location.href="/login"'>Login</button>
-    <button class="button" onclick='location.href="/register"'>Register</button>
-    {% endif %}
-</div>
+     <div class ="row">
+         <div class="col-sm-6" "align-self-center">
+             <div>
+             <h1>{{ subtitle }}</h1>
+             <p class='big-text'>We Have Food <br> At Home!</p>
+              <p class = 'small-text'>{{text2}}</p>   
+            {%if current_user.is_authenticated %}
+            <button class="button" type="home2" onclick='location.href="/login"'>Your Fridge</button>
+            {% else %}
+            <button class="button" type = "home1" onclick='location.href="/login"'>Login</button>
+            <button class="button" type = "home2" onclick='location.href="/register"'>Register</button>
+            {% endif %} 
+             </div>
+    </div>
+         <div class="col-sm-6">
+             <video width="700" height="500" autoplay muted loop>
+              <source src="static/home.mp4" type="video/mp4">
+              Your browser does not support HTML5 video.
+            </video>
+         </div>
+    
+
+
 
  <!--   <h2>{{ subtitle }}</h2>
     <h3>{{ subtitle2 }}</h3>
